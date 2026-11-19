@@ -47,6 +47,9 @@ jobs:
           just audit
   gitleaks:
     runs-on: ubuntu-slim
+    permissions:
+      contents: read      # needed to check out a private repo
+      pull-requests: read # needed to list PR commits in a private repo
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
