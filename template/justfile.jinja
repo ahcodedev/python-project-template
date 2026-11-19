@@ -12,12 +12,14 @@ ci-lint:
     uv run ruff format --check .
     uv run codespell
     uv run actionlint .github/workflows/*.yml
+{%- if use_docs %}
 # Build the docs in strict mode (output in site/)
 docs-build:
     uv run zensical build --strict
 # Serve the docs locally with live reload
 docs-serve:
     uv run zensical serve
+{%- endif %}
 # Scan staged changes for secrets
 git-leaks:
     gitleaks git --pre-commit --staged --redact
@@ -34,9 +36,11 @@ markdownlint:
 # Run the git hooks on staged files
 prek:
     uv run prek
+{%- if use_releases %}
 # Remove non-release default labels and sync the release labels on GitHub
 set-github-labels:
     ./scripts/sync-labels.sh
+{%- endif %}
 # Install Homebrew tools and sync the project
 setup:
     brew bundle install

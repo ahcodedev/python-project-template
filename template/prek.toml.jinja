@@ -32,6 +32,7 @@ hooks = [
         entry = "just test",
         pass_filenames = false
     },
+{%- if use_docs %}
     {
         id = "docs-build",
         name = "docs build",
@@ -40,6 +41,7 @@ hooks = [
         files = "^(docs/|src/|zensical\\.toml$)",
         pass_filenames = false
     },
+{%- endif %}
     {
         id = "markdownlint",
         name = "markdownlint",

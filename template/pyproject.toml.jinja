@@ -21,6 +21,7 @@ dev = [
     "ruff>=0.17.3",
     "ty>=0.0.96",
 ]
+{%- if use_docs %}
 docs = [
     "mkdocstrings[python]>=1.0.8",
     "zensical>=0.1.0",
@@ -28,6 +29,7 @@ docs = [
 
 [tool.codespell]
 skip = "./site"  # Built docs output
+{%- endif %}
 
 [tool.pytest.ini_options]
 addopts = "--cov=src --cov-report=term-missing --cov-fail-under 98"

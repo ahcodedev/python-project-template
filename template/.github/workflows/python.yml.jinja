@@ -1,3 +1,4 @@
+{% raw -%}
 name: Python CI Checks
 
 on:
@@ -32,9 +33,11 @@ jobs:
     - name: Unit tests
       run: |
         just test
+{%- endraw %}{% if use_docs %}{% raw %}
     - name: Docs build
       run: |
         just docs-build
+{%- endraw %}{% endif %}{% raw %}
   markdownlint:
     runs-on: ubuntu-slim
     permissions:
@@ -48,3 +51,4 @@ jobs:
       uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff # v24.2.0
       with:
         globs: "**/*.md"
+{%- endraw %}

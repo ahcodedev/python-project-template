@@ -19,6 +19,8 @@ render:
     uvx copier copy --trust --defaults --vcs-ref HEAD \
         --data project_name=demo-project \
         --data github_repo=example-owner/demo-project \
+        --data use_docs=true \
+        --data use_releases=true \
         . {{ rendered }}
 # Install Homebrew tools from the Brewfile
 setup:
