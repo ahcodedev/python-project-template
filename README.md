@@ -12,7 +12,7 @@ template changes with `copier update`.
 * `uv` for dependencies and `just` as the command runner
 * ruff, ty, codespell, actionlint, and markdownlint for linting
 * pytest with coverage, Zensical docs with an API reference generated from docstrings
-* pip-audit, gitleaks, and zizmor for security checks
+* pip-audit, betterleaks, and zizmor for security checks
 * prek git hooks, GitHub Actions CI, Dependabot, Release Drafter, and a release workflow
 * A VS Code dev container
 
@@ -82,7 +82,7 @@ Commands (requires `uv` and `just`; install `just` with `brew install just`, the
 * `just check` - render the demo project and run its lint, tests, docs build, pip-audit, and zizmor (used in CI)
 * `just actionlint` - lint the root and template GitHub workflows
 * `just zizmor` - audit the root and template GitHub workflows for security issues
-* `just git-leaks` - scan staged changes for secrets with gitleaks
+* `just betterleaks` - scan staged changes for secrets with betterleaks
 * `just prek` - run the git hooks on staged files
 
 ### Releases

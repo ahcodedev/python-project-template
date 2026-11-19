@@ -35,10 +35,10 @@ hooks = [
         pass_filenames = false
     },
     {
-        id = "git-leaks",
-        name = "git leaks",
+        id = "betterleaks",
+        name = "betterleaks",
         language = "system",
-        entry = "gitleaks git --pre-commit --staged --redact",
+        entry = "just betterleaks",
         pass_filenames = false
     }
 ]

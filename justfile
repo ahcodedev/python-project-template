@@ -8,8 +8,8 @@ default:
 actionlint:
     actionlint .github/workflows/*.yml template/.github/workflows/*.yml
 # Scan staged changes for secrets
-git-leaks:
-    gitleaks git --pre-commit --staged --redact
+betterleaks:
+    betterleaks git --pre-commit --staged --redact
 # Run the git hooks on staged files
 prek:
     prek
