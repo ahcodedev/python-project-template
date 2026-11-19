@@ -34,28 +34,39 @@ manage project configuration and commands
 * `just test` - run unit tests
 * `just audit` - check dependencies for known vulnerabilities with pip-audit
 * `just markdownlint` - lint Markdown files with markdownlint-cli2
+{%- if use_docs %}
 * `just docs-build` - build the docs site with Zensical (strict mode, output in `site/`)
 * `just docs-serve` - serve the docs locally with live reload
+{%- endif %}
 * `just prek` - run pre-commit hooks via prek
 * `just git-leaks` - scan staged changes for secrets with gitleaks
 * `just zizmor` - audit GitHub Actions workflows for security issues
+{%- if use_releases %}
 * `just set-github-labels` - remove GitHub's non-release default labels, then create or update the release labels
   (for fresh repos, requires `gh auth login`)
+{%- endif %}
 * `uv add {package}` - install a dependency
 
 ## CI and Security
 
 | Workflow              | Runs on                 | Purpose                                      |
 | --------------------- | ----------------------- | -------------------------------------------- |
+{%- if use_docs %}
 | `python.yml`          | push / PR to `main`     | lint, unit tests, docs build, markdownlint   |
+{%- else %}
+| `python.yml`          | push / PR to `main`     | lint, unit tests, markdownlint               |
+{%- endif %}
 | `security.yml`        | push to `main`, all PRs | zizmor, gitleaks, pip-audit dependency audit |
+{%- if use_releases %}
 | `release-drafter.yml` | push to `main`, PRs     | update the draft release, label PRs          |
 | `release.yml`         | manual                  | publish a release                            |
+{%- endif %}
 
 * GitHub Actions are pinned to full commit SHAs, with the version in a trailing comment
 * Dependabot (`.github/dependabot.yml`) checks monthly for updates to GitHub Actions, Python
   dependencies, the dev container image, and dev container features. New releases wait 7 days
   before an update is proposed. Dependabot PRs get the `dependencies` label
+{%- if use_releases %}
 
 ## Releases
 
@@ -83,6 +94,7 @@ labels; any other repository labels you add are ignored.
 * Merging to `main` updates a draft GitHub Release with the next version and notes
 * To release, run the **Release** workflow from the Actions tab. It bumps the version in
   `pyproject.toml`/`uv.lock`, tags the release, and uploads build artifacts. Release notes live on the GitHub Release
+{%- endif %}
 
 ## Usage
 

@@ -11,15 +11,16 @@ _exclude:
   - "__pycache__"
   - ".git"
   - ".DS_Store"
-  # Example code is only added on `copier copy`; `copier update` never adds it back
+  # Example code is only added on `copier copy`; `copier update` never adds it back.
+  # Docs and release files are also skipped when their option is off
   - "{% if _copier_operation == 'update' %}src/*/hello_world.py{% endif %}"
   - "{% if _copier_operation == 'update' %}tests/test_hello_world.py{% endif %}"
-  - "{% if _copier_operation == 'update' %}scripts/sync-labels.sh{% endif %}"
-  - "{% if _copier_operation == 'update' %}/docs{% endif %}"
-  - "{% if _copier_operation == 'update' %}zensical.toml{% endif %}"
-  - "{% if _copier_operation == 'update' %}.github/release-drafter.yml{% endif %}"
-  - "{% if _copier_operation == 'update' %}.github/workflows/release-drafter.yml{% endif %}"
-  - "{% if _copier_operation == 'update' %}.github/workflows/release.yml{% endif %}"
+  - "{% if _copier_operation == 'update' or not use_releases %}scripts/sync-labels.sh{% endif %}"
+  - "{% if _copier_operation == 'update' or not use_docs %}/docs{% endif %}"
+  - "{% if _copier_operation == 'update' or not use_docs %}zensical.toml{% endif %}"
+  - "{% if _copier_operation == 'update' or not use_releases %}.github/release-drafter.yml{% endif %}"
+  - "{% if _copier_operation == 'update' or not use_releases %}.github/workflows/release-drafter.yml{% endif %}"
+  - "{% if _copier_operation == 'update' or not use_releases %}.github/workflows/release.yml{% endif %}"
 _tasks:
   - uv lock
 
@@ -43,3 +44,13 @@ github_repo:
   type: str
   help: GitHub owner/repo (used for the README badges)
   validator: "{% if github_repo.count('/') != 1 %}Use the owner/repo format{% endif %}"
+
+use_docs:
+  type: bool
+  help: Include Zensical docs (docs/, zensical.toml, docs build in CI and hooks)?
+  default: false
+
+use_releases:
+  type: bool
+  help: Include Release Drafter, the manual release workflow, and release labels?
+  default: false

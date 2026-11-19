@@ -5,6 +5,7 @@
 ## Related Issues
 
 <!-- e.g. Closes #123 -->
+{%- if use_releases %}
 
 ## Type of Change
 
@@ -17,6 +18,7 @@ Add a release label to this PR from the Labels section of the PR sidebar
   chore / ci / dependencies / documentation / refactor -> patch
   skip-changelog              -> excluded from release notes
 -->
+{%- endif %}
 
 ## Checklist
 
@@ -24,4 +26,6 @@ Add a release label to this PR from the Labels section of the PR sidebar
 - [ ] `just test` passes
 - [ ] Tests added or updated for the change
 - [ ] `README.md` updated if needed
+{%- if use_releases %}
 - [ ] Release label added
+{%- endif %}

@@ -126,6 +126,8 @@ dmypy.json
 
 # Claude
 .claude/*.local.*
+Claude.md.example
+CLAUDE.md
 
 # Dev Container
 .devcontainer/devcontainer-lock.json
