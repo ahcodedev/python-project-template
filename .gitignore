@@ -10,3 +10,7 @@ site/
 
 # OS Stuff
 .DS_Store
+
+# Claude
+.claude
+*.local.*
