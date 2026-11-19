@@ -12,8 +12,6 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-    "actionlint-py>=1.7.12.25",
-    "codespell>=2.4.3",
     "pip-audit>=2.10.1",
     "prek>=0.5.10",
     "pytest",
@@ -26,21 +24,28 @@ docs = [
     "mkdocstrings[python]>=1.0.8",
     "zensical>=0.1.0",
 ]
-
-[tool.codespell]
-skip = "./site"  # Built docs output
 {%- endif %}
 
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+fail_under = 98
+show_missing = true
+
 [tool.pytest.ini_options]
-addopts = "--cov=src --cov-report=term-missing --cov-fail-under 98"
+testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
 
 [tool.ruff.lint]
 select = ["B", "E", "F", "W", "I", "N", "PT", "D", "UP", "RUF", "SIM", "S", "C4", "PTH", "PL", "PERF"]  # Choose your rule categories
-ignore = ["D100", "D104", "D211", "D203", "D213", "D400", "D401", "D415"]
+ignore = ["D100", "D104", "D415"]
 extend-ignore = ["E501"]  # Line too long (handled by formatter)
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["D", "S101"]  # Ignore docstring (D) and assert (S101) errors in tests

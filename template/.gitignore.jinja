@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Build and packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environments and environment files
+.venv/
+.env*
+
+# Test and tool caches
+.coverage
+.coverage.*
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+coverage.xml
+{%- if use_docs %}
+
+# Docs build output and cache
+/site
+.cache/
+{%- endif %}
+
+# OS
+.DS_Store
+
+# Claude (committing Claude files is opt-in)
+.claude/
+.claude/settings.local.json
+CLAUDE.md
+CLAUDE.md.example
+
+# Dev Container
+.devcontainer/devcontainer-lock.json

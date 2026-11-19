@@ -8,10 +8,12 @@ Uses `uv` for environment/dependency management and `just` as the command runner
 
 - `just setup` - install Homebrew tools (`Brewfile`) and sync the project
 - `just sync` - install all dependency groups into `.venv`
-- `just lint` - type check (ty), lint + autofix (ruff), format (ruff), spell check (codespell),
-  workflow lint (actionlint)
-- `just ci-lint` - same checks without modifying files (used to verify, not fix)
-- `just test` - run pytest with coverage (fails under 98%)
+- `just lint` - type check (ty), lint + autofix (ruff), format (ruff), spell check (typos),
+  workflow lint (actionlint), YAML lint (yamllint), JSON validation (jq)
+- `just ci-lint` - same checks without modifying files, except spell check (used to verify, not fix)
+- `just spellcheck` - check spelling (typos)
+- `just test` - run pytest
+- `just coverage` - run pytest with coverage (fails under 98%)
 - `just audit` - check dependencies for known vulnerabilities (pip-audit)
 - `just markdownlint` - lint Markdown files (markdownlint-cli2, config in `.markdownlint-cli2.jsonc`)
 {%- if use_docs %}
@@ -19,15 +21,16 @@ Uses `uv` for environment/dependency management and `just` as the command runner
 - `just docs-serve` - serve the docs locally with live reload
 {%- endif %}
 - `just zizmor` - audit GitHub Actions workflows for security issues
-- `just git-leaks` - scan staged changes for secrets
+- `just betterleaks` - scan staged changes for secrets
 {%- if use_releases %}
 - `just set-github-labels` - remove non-release default labels, then create/update the release labels on GitHub
   (`scripts/sync-labels.sh`, needs `gh`, for fresh repos)
 {%- endif %}
+- `just update-template` - pull in the latest Copier template changes
 - `uv add <pkg>` / `uv add --dev <pkg>` - add a runtime / dev dependency (never edit `uv.lock` by hand)
 - `uv run {{ project_name }}` - run the app entry point
 
-Run `just lint` and `just test` before considering a change done.
+Run `just lint` and `just coverage` before considering a change done.
 
 ## Layout
 
@@ -36,7 +39,7 @@ Run `just lint` and `just test` before considering a change done.
 - `tests/` - pytest tests; import the package as `from {{ package_name }}.<module> import ...`
 - `prek.toml` - git hook config (`prek install` to enable)
 - `.github/workflows/` - `python.yml` (lint, tests,{% if use_docs %} docs build,{% endif %} markdownlint),
-  `security.yml` (zizmor, gitleaks, pip-audit){% if use_releases %},
+  `security.yml` (zizmor, betterleaks, pip-audit){% if use_releases %},
   `release-drafter.yml` (draft release, PR labels), `release.yml` (manual release)
 - `.github/release-drafter.yml` - release label → version bump / release notes section mapping{% endif %}
 - `.github/dependabot.yml` - weekly updates for actions, uv, dev container image and features
@@ -45,7 +48,7 @@ Run `just lint` and `just test` before considering a change done.
 
 ## Conventions
 
-- Python >= 3.14; ruff line length 100, double quotes
+- Python >= 3.15; ruff line length 100, double quotes
 - Docstrings required in `src/` (ruff `D` rules), not in `tests/`
 - Type hints on public functions; code must pass `ty check`
 - Renaming the project means updating `[project] name`, the `src/<name>/` folder, and `[project.scripts]` together
