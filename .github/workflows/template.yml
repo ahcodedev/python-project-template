@@ -43,9 +43,12 @@ jobs:
       with:
         enable-cache: false
         version: ">=0.13,<0.14"
-    - name: Install just
+    # Tools the rendered project's ci-lint needs
+    - name: Install just, actionlint, and yamllint
       run: |
-        uv tool install rust-just
+        uv tool install rust-just==1.59.0
+        uv tool install actionlint-py==1.7.12.25
+        uv tool install yamllint==1.38.0
     - name: Render a project and run its checks
       run: |
         just check

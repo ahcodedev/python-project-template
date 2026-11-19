@@ -25,11 +25,12 @@ render:
 # Install Homebrew tools from the Brewfile
 setup:
     brew bundle install
-# Render a demo project and run its lint, tests, docs build, dependency audit, and workflow audit
+# Render a demo project and run its lint, spell check, tests, docs build, dependency audit, and workflow audit
 check: render
     cd {{ rendered }} && just sync
     cd {{ rendered }} && just ci-lint
-    cd {{ rendered }} && just test
+    cd {{ rendered }} && uvx typos
+    cd {{ rendered }} && just coverage
     cd {{ rendered }} && just docs-build
     cd {{ rendered }} && just audit
     cd {{ rendered }} && uvx zizmor --offline .
