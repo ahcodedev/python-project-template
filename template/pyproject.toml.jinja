@@ -48,7 +48,7 @@ extend-ignore = ["E501"]  # Line too long (handled by formatter)
 convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["D", "S101"]  # Ignore docstring (D) and assert (S101) errors in tests
+"tests/*" = ["D", "S101", "PLR2004"]  # Ignore docstring (D) and assert (S101) errors in tests
 
 [tool.ruff.format]
 quote-style = "double"
