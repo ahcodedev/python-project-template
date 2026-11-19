@@ -2,6 +2,7 @@
 
 [![Template Checks](https://github.com/ahcodedev/python-project-template/actions/workflows/template.yml/badge.svg?branch=main)](https://github.com/ahcodedev/python-project-template/actions/workflows/template.yml)
 [![Security](https://github.com/ahcodedev/python-project-template/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/ahcodedev/python-project-template/actions/workflows/security.yml)
+[![zizmor](https://img.shields.io/badge/%F0%9F%8C%88-zizmor-white?labelColor=white)](https://zizmor.sh/)
 
 A [Copier](https://copier.readthedocs.io/) template for Python projects. Projects created from it can pull in later
 template changes with `copier update`.
