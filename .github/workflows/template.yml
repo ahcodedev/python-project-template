@@ -30,8 +30,7 @@ jobs:
       run: |
         just actionlint
   render-and-check:
-    # ubuntu-latest includes Node, which markdownlint-cli2 needs
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: read
     steps:
@@ -52,8 +51,8 @@ jobs:
     - name: Render a project and run its checks
       run: |
         just check
-    # Same markdownlint-cli2 version as the VS Code markdownlint extension
+    # Same action pin as the template's python.yml
     - name: Markdownlint
-      working-directory: _rendered/demo-project
-      run: |
-        npx --yes markdownlint-cli2@0.23.2 "**/*.md"
+      uses: DavidAnson/markdownlint-cli2-action@696eb3f2509270d7b882d2aa68347bc676e7af34 # v25.0.0
+      with:
+        globs: _rendered/demo-project/**/*.md
